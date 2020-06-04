@@ -37,5 +37,3 @@ http://huziketang.mangojuice.top/books/react/lesson28
 3. 总结
    现在我们有了一个比较通用的 createStore，它可以产生一种我们新定义的数据类型 store，通过 store.getState 我们获取共享状态，而且我们约定只能通过 store.dispatch 修改共享状态。store 也允许我们通过 store.subscribe 监听数据数据状态被修改了，并且进行后续的例如重新渲染页面的操作。
 
-
-  
