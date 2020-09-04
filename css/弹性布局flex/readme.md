@@ -1,3 +1,60 @@
-## 弹性布局 (display: flex;)
+## Flex-弹性布局 (display: flex;)
+
+- 采用 Flex 布局的元素，称为 Flex 容器（flex container），简称"容器"。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称"项目"。
+
+![img](https://user-gold-cdn.xitu.io/2018/4/2/1628695cb210abb4?imageslim)
+
+- Flex属性分为两部分，一部分作用于容器称容器属性，另一部分作用于项目称为项目属性
+
+#### 父元素属性(即容器属性）6个
+
+1. flex-direction : 决定主轴的方向（即项目的排列方向） 
+
+   ​    row(默认 水平) |  row-reverse | column | column-reverse;
+
+2.  flex-wrap : nowrap(默认不换行) | wrap | wrap-reverse
+
+3. flex-flow : <flex-direction> || <flex-wrap> 简写形式
+
+4. justify-content : 主轴对齐方式，默认水平 
+
+​            flex-start(左对齐) | flex-end(右对齐) | center (居中)| 
+
+​			space-between(两端对齐) | space-around(两侧间隔相等)
+
+5. align-items : 交叉轴对齐方式 
+
+​           flex-start | flex-end | center 
+
+​           baseline(项目的第一行文字对齐) | stretch(占满容器)
+
+6. align-content : 多根轴线的对齐方式 多行/列， 类似于主轴上`justify-content`的作用。
+
+​          flex-start | flex-end | center | space-between | space-around | stretch
+
+#### 子元素属性(即项目属性)  6个
+
+1.  order : 数字越小排列越靠前， 可以为负值
+
+2.  flex-grow : 放大比例，默认0
+
+​        所有项目为1 等分空间：一个项目为1 其余为固定值 这个项目占据剩余所有空间
+
+3. flex-shrink : 缩小比例，默认1 空间不足则缩小
+
+4. flex-basis : 在分配多余空间之前，项目占据的主轴空间 默认auto  单位：px / %
+
+​        flex : 0 0 25% (占据25%空间 不自动缩小)
+
+5. flex : <flex-grow> <flex-shrink> <flex-basis>简写
+
+6. align-self : 单个项目设置特殊的排列 会覆盖align-items 
+
+- 应用 双飞翼、圣杯布局、悬挂式、固定的底栏、网格布局
+
+## 参考文章
+
 https://www.cnblogs.com/hellocd/p/10443237.html
 https://www.runoob.com/w3cnote/flex-grammar.html
+
+【基础知识】Flex-弹性布局原来如此简单！！https://juejin.im/post/6844903586841755655
