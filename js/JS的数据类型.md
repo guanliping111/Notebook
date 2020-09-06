@@ -3,7 +3,7 @@
 - 基本数据类型 
 
 1. **undefined** ： 已声明 未赋值 => 未定义
-2.  **null**： 代表空对象 主要用于赋值给一些可能会返回对象的变量，作为初始化。
+2.  **null**： 代表空对象 空指针 主要用于赋值给一些可能会返回对象的变量，作为初始化。
 3. **boolean**
 4. **number**
 5. **string**
@@ -39,6 +39,34 @@ console.log(typeof null);            // object     null 的数据类型被 typeo
 2. `instanceof`: instanceof可以精准判断引用数据类型（Array，Function，Object），而基本数据类型不能被instanceof精准判断。
 3. `constructor`
 4. `Object.prototype.toString.call()`
+
+##### 问：数据类型有哪些 ？类型判断有哪些 优缺点？
+
+基本数据类型 Boolean Null Undefined Number String Symbol BigInt
+
+引用数据类型 Object, 包含 Date function Array
+
+- typeof 
+
+  - 对于非 Object的基本数据类型，除了null，均可判断
+
+  - 对于null 返回 object：
+
+    null不是对象，尽管 typeof null = object 。
+
+  ​       因为这是 js 一个久远的bug，js诞生以来便如此。在js最初实现时，值是由一个表示类型的标签和实际数据表示的，而对象的标签是 0。又因为null 代表的是空指针，标签也是0，所以 typeof null 是 'object'。因此 null 不是 对象。
+
+  - 对于引用数据类型，除了function，都返回object
+  - 对于function 返回 function
+  - typeof(typeof a) 返回 string
+
+- instanceof
+
+  A instanceof B 就是用来判断B的原型是否在A的原型链上
+
+- Object.prototype.toString.call 最全面
+
+- constructor
 
 ## 3. 介绍js有哪些内置对象？
 
