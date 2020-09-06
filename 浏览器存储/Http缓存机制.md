@@ -16,7 +16,33 @@
 2. 如果未命中强缓存，则浏览器会将请求发送到服务器请求加载。服务器判断浏览器的本地缓存是否失效。若可以使用，服务器并不会返回资源信息，浏览器从本地缓存中加载资源。
 3. 如果未命中协商缓存，服务器会将完整的资源返回给浏览器，浏览器加载新资源，并更新缓存。
 
-### 1. Last-Modified与if-Modified-Since （协商缓存）
+### 1.  Cache-Control（强缓存）
+
+命中强缓存时，浏览器并不会将请求发送给服务器。在Chrome的开发者工具中看到http的返回码是200，但是在Size列会显示为(from cache)。
+
+**Cache-Control** : 通用消息头字段，被用于在http请求和响应中，通过指定指令来实现缓存机制。缓存指令是单向的，这意味着在请求中设置的指令，不一定被包含在响应中。
+
+**使用方法：**``` res.setHeader('Cache-Control', 'max-age=20')```
+
+- Cache-Control  强缓存  相对时间
+
+  强缓存是利用http的返回头中的Expires或者Cache-Control两个字段来控制的，用来表示资源的缓存时间。
+
+  返回码是200
+
+  cache-control的优先级更高。
+
+- Expires 具体时间 在这之前是有效的 之后无效
+
+  缓存过期时间，用来指定资源到期的时间，是服务器端的具体的时间点。
+
+  也就是说，Expires=max-age + 请求时间，需要和Last-modified结合使用。
+
+  Expires是Web服务器响应消息头字段，
+
+  在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求
+
+### 2.  Last-Modified与if-Modified-Since （协商缓存）
 
  **Last-Modified **：响应头，资源最后修改时间，由**服务器告诉浏览器**。
  **if-Modified-Since**：请求头，资源最新修改时间，由**浏览器告诉服务器**(其实就是上次服务器给的Last-Modified，请求又还给服务器对比)，和Last-Modified是一对，它两会在服务器端进行对比。
@@ -47,15 +73,16 @@
   
   **浏览器**：服务器服务器，我还需要一个a.txt 的文件，我把这个文件上次修改时间发你if-Modified-Since，你对比一下文件最近有不有修改！
   
+
 **服务器**：ok，我帮你找一下。服务器将if-Modified-Since与Last-Modified做了个对比。
-  
+
 if-Modified-Since 与Last-Modified不相等，服务器查找了最新的a.txt，同时再次返回全新的Last-Modified。
-  
+
 if-Modified-Since 与Last-Modified相等即命中缓存，服务器返回状态码304，文件没修改过，你还是用你的本地缓存。
-  
+
   
 
-### 2. Etag与If-None-Match（协商缓存）
+### 3.  Etag与If-None-Match（协商缓存）
 
  	**Etag**：响应头，由服务器设置告诉浏览器。
 
@@ -113,31 +140,7 @@ if-Modified-Since 与Last-Modified相等即命中缓存，服务器返回状态�
   
   ![浏览器再次请求](E:\workspace\gitwork\Learn-bm\js\cache\浏览器再次请求.jpg)
 
-### 3. Cache-Control（强缓存）
-
-命中强缓存时，浏览器并不会将请求发送给服务器。在Chrome的开发者工具中看到http的返回码是200，但是在Size列会显示为(from cache)。
-
-**Cache-Control** : 通用消息头字段，被用于在http请求和响应中，通过指定指令来实现缓存机制。缓存指令是单向的，这意味着在请求中设置的指令，不一定被包含在响应中。
-
-**使用方法：**``` res.setHeader('Cache-Control', 'max-age=20')```
-
-- Cache-Control  强缓存  相对时间
-
-  强缓存是利用http的返回头中的Expires或者Cache-Control两个字段来控制的，用来表示资源的缓存时间。
-
-  返回码是200
-
-  cache-control的优先级更高。
-
-- Expires 具体时间 在这之前是有效的 之后无效
-
-  缓存过期时间，用来指定资源到期的时间，是服务器端的具体的时间点。
-
-  也就是说，Expires=max-age + 请求时间，需要和Last-modified结合使用。
-
-  Expires是Web服务器响应消息头字段，
-
-  在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求
+- 
 
 ### 4. 模拟服务器接收与发送
 
