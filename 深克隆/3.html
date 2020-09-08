@@ -1,0 +1,67 @@
+<script>
+    //面试版深克隆
+    const clone = parent => {
+        //要面对不同的对象(正则、数组、Date等)要采用不同的处理方式，
+        //需要实现一个对象类型判断函数。
+        //判断函数 isType
+        const isType = (obj, type) => {
+            if(typeof obj !== "object") return false;
+            const typeString = Object.prototype.toString.call(obj);//?
+            //toSting()方法返回对象的字符串表现。
+            let flag; //正则的flag属性
+            switch(type) {
+                case "Array":
+                    flag = typeString === "[object Array]";
+                    break;
+                case "Date":
+                    flag = typeString === "[object Date]";
+                    break;
+                case "RegExp":
+                    flag = typeString === "[object RegExp]";
+                    break;
+                default:
+                    flag = false;
+            }
+            return flag;
+        };
+        //处理正则
+        const getRegExp = re => {
+            var flags = "";
+            if(re.global)   flags += "g";
+            if(re.ignoreCase)   flags += "i";
+            if(re.multiline)    flags += "m";
+            return flags;
+        };
+        //声明两个存储循环引用的数组
+        const parents = [];
+        const children = [];
+
+        const clone1 = parent => {
+            if(parent === null) return null;
+            if(typeof parent !== "object") return parent;
+            let child, proto;
+            //对数组处理
+            if(isType(parent, "Array")) 
+            {
+                child = [];
+            }
+            //对正则处理
+            else if(isType(parent, "RegExp")) 
+            {
+                child = new RegExp(parent.source, getRegExp(parent));
+                if(parent.lastIndex)  child.lastIndex = parent.lastIndex;
+            }
+            //对Date对象处理
+            else if(isType(parent, "Date"))
+            {
+                child = new Date(parent.getTime())
+            }
+            else {
+                // 处理对象原型
+                proto = Object.getPrototypeOf(parent);
+                // 利用Object.create切断原型链
+                child = Object.create(proto);
+            }   
+        }
+    }
+</script>

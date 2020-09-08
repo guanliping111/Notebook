@@ -1,0 +1,32 @@
+<script>
+    //递归版深克隆 - 处理循环
+    let obj = {
+        a: 1,
+        b: {
+            c: 3
+        }
+    }
+    //Map():一个Map对象在迭代时会根据对象中元素的插入顺序来进行 — 
+    //一个  for...of 循环在每次迭代后会返回一个形式为[key，value]的数组。
+    let map = new Map();
+    function deepClone(obj) {
+        let t = {};
+        if(map.get[obj]) 
+            return map.get[obj]; //读取
+        map.set(obj,t);//添加
+        //Map也可以通过forEach()方法迭代：
+        Object.keys(obj).forEach(k => {
+            if(typeof obj[k] === 'object') {
+                t[k] = deepClone(obj[k]);
+            }
+            else{
+                t[k] = obj[k]
+            }
+        })
+        return t;
+    }
+    let obj1 = deepClone(obj);
+    console.log(obj1);
+    obj.b.c = 4;
+    console.log(obj1, obj); //obj1(b=3) obj(b=4)
+</script>

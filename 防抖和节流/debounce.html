@@ -1,0 +1,21 @@
+<script>
+    //函数防抖：将几次操作合并为一次操作进行。
+    //原理是: 维护一个计时器，规定在 wait 时间后触发函数，
+    //但是在wait时间内再次触发的话，就会取消之前的计时器而重新设置。
+    //这样一来，只有最后一次操作能被触发。
+
+    //实现防抖 步骤
+    //1.let timeout
+    //2. if(timeout)  clear
+    //3. timeout = setTime
+    function debounce(fn, wait) {
+        let timeout = null;
+        //写一个具有防抖功能的自己内部定义的函数function
+        return function(event) {
+            if(timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                fn.call(this,event);
+            },wait)
+        }
+    }
+</script>

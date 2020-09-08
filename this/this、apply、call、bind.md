@@ -32,22 +32,28 @@
 
 > **`call()` **方法使用一个指定的 `this` 值和单独给出的一个或多个参数来调用一个函数。
 >
-> 语法：function.call(thisArg, arg1, arg2, ...)
+> 语法：function.call(thisArg, arg1, arg2, ...)  	其余传递给函数的参数逐个列出。
 
 - **apply()**: 
 
 > **`apply()`**方法调用一个具有给定`this`值的函数，以及作为一个数组（或[类似数组对象](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Indexed_collections#Working_with_array-like_objects)）提供的参数。
 >
-> 语法：func.apply(thisArg, [argsArray])
+> 语法：func.apply(thisArg, [argsArray])   第二个是参数数组（可以是array的实例，或者arguments对象）。  
 
-- call()和apply的主要区别：`call()`方法接受的是**参数列表**，而`apply()`方法接受的是**一个参数数组**。
 - **`bind()`**:
 
 > **`bind()` **方法创建一个新的**函数**，在 `bind()` 被调用时，这个新函数的 `this` 被指定为 `bind()` 的**第一个参数**，而其余参数将作为新函数的参数，供调用时使用。
 >
 > 语法：function.bind(thisArg[, arg1[, arg2[, ...]]])
 
-## 手写call 和apply
+- 区别：
+
+1. call()和apply()的作用是一样的，区别在于传入参数的不同；
+2. 第一个参数都是，指定函数体内this的指向；
+3. call()和apply的主要区别：第二个参数开始不同，`call()`方法接受的是**参数列表**，而`apply()`方法接受的是**一个参数数组**。
+4. call比apply的性能要好，平常可以多用call, call传入参数的格式正是内部所需要的格式。
+
+## 手写call和apply
 
 这两个都是改变this指向，唯一区别就是传递参数不同
 

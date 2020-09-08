@@ -1,6 +1,6 @@
 ## 1. js的数据类型
 
-- 基本数据类型 
+- 基本数据类型 :直接存储在栈(stack)中，占据空间小，大小固定，属于被频繁使用的数据
 
 1. **undefined** ： 已声明 未赋值 => 未定义
 2.  **null**： 代表空对象 空指针 主要用于赋值给一些可能会返回对象的变量，作为初始化。
@@ -10,15 +10,19 @@
 6. **symbol**(es6新增)：唯一值，symbol作为属性值的时候，他它不可被枚举,所以不能使用for...in ... 来循环这个数据的属性
 7. **bigInt** (es10新增) ：bigint 是一种内置对象，它提供一种方法来存储大于Number存储的数值，它在数据后面加一个n，并且可以表示任意大的整数
 
-直接存储在栈(stack)中，占据空间小，大小固定，属于被频繁使用的数据
+- 引用数据类型：同时存储在**栈**（stack）和**堆**（heap）中，占据空间大、大小不固定。
 
-- 引用数据类型
+  存储的是该对象在栈中引用，真实的数据存放在堆内存里
 
-object( function、Array、Date等)
+  引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址,当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体。
 
-同时存储在**栈**（stack）和**堆**（heap）中，占据空间大、大小不固定。
+  ![图片描述](https://segmentfault.com/img/bVbrl5N?w=459&h=347)
 
-在栈中存储了指针，指向实体的起始地址。
+  
+  
+  object( function、Array、Date等)
+  
+  
 
 ## 2. JS中数据类型的判断
 
@@ -62,7 +66,7 @@ console.log(typeof null);            // object     null 的数据类型被 typeo
 
 - instanceof
 
-  A instanceof B 就是用来判断B的原型是否在A的原型链上
+  A instanceof B ：就是用来判断B的原型是否在A的原型链上
 
 - Object.prototype.toString.call 最全面
 
@@ -70,13 +74,15 @@ console.log(typeof null);            // object     null 的数据类型被 typeo
 
 ## 3. 介绍js有哪些内置对象？
 
-
+Array数组对象、Math方法、String方法、date日期对象的方法。
 
 ## 4.Javascript 的作用域和作用域链
 
 作用域链的本质上是一个指向变量对象的指针列表。
 
 ## 5. javascript 创建对象的几种方式？
+
+new关键字 clone
 
 ##  6. 事件委托是什么？
 
