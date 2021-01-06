@@ -1,0 +1,82 @@
+## TS基础
+
+为什么要使用TS？
+
+**第一次开发**的时候稍微多花一些时间去编写类型，后续维护、重构的时候就会发挥它的作用了，还是非常推荐**长期维护的项目**使用它的。
+
+1. ts和tsx区别 : tsx对应jsx语法，写组件代码。ts是没有react语法和ui代码，写类型接口interface、store和后端服务接口service
+
+2. css和scss区别，scss预编译，方便代码书写，编译器会自动编译成css来执
+
+   1. 创建 react+ts 的文件
+
+   ​    npx create-react-app my-app --template typescript
+
+   2. 安装插件 code-running 执行单独的文件，启动用 ts-node 文件路径
+
+   3. 学习 typescrip 语法 - 基础类型 any - 变量声明 let 解构 展开运算符 - 接口 interface
+
+   ​    接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。
+
+   
+
+   #### readonly vs const
+
+   ​        最简单判断该用readonly还是const的方法是看要把它做为变量使用还是做为一个属性。
+
+   ​        做为变量使用的话用 const，若做为属性则使用readonly。
+
+   #### 范型
+
+   ​        我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息，像第一个例子那像保持准确性，传入数值类型并返回数值类型。
+
+   ​		使用范型变量 T: 使用泛型创建像identity这样的泛型函数时，编译器要求你在函数体必须正确的使用这个通用的类型。 换句话说，你必须把这些参数当做是任意或所有类型。
+
+- #### ts的一些属性使用
+
+  什么时候需要使用t s的类型监测，有很多个字断，需要单独将字段列出来， 如果有相同的字段名，可以使用pick.
+
+  1. extends 继承类型
+  2. Omit 忽略某些字段
+  3. Pick  选择某些字段
+  4. Required 设置全部字段为必需的，不带？
+  5. Partial 设置全部字段为可选属性，都不是必需的 ，带？
+
+```tsx
+				export interface IUserInfo {
+            name: string,
+            lastName: string,
+        }
+        export interface IStudent extends IUserInfo {
+            grade: number;
+            classNo: number;
+        }
+
+        type IStudentWithoutClassNo = Omit<IStudent, 'classNo'>
+        type IUserWithGrade = IUserInfo & Pick<IStudent, 'grade'>
+        type IRequiredAllUserInfo = Required<IUserInfo>;
+        type IPartialUserInfo = Partial<IUserInfo>;
+
+        const student1: IStudentWithoutClassNo;
+        const student2: IUserWithGrade;
+        const student3: IRequiredAllUserInfo = {
+            lastName: '',
+            name: '',
+        };
+```
+
+- #### type和interface的区别
+
+  1. type 可以声明基本类型别名，联合类型，元组等类型
+
+     type 语句中还可以使用 typeof 获取实例的 类型进行赋值
+
+  2. interface 能够声明合并
+
+- #### 类型断言
+
+  类型断言好比其它语言里的类型转换，但是不进行特殊的数据检查和解构。 它没有运行时的影响，只是在编译阶段起作用。
+
+  1. 类型断言有两种形式。 其一是“尖括号”语法：(<string>someValue).length
+  2. 另一个为`as`语法：(someValue as string).length
+

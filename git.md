@@ -1,1 +1,0 @@
-![image-20200910104513221](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200910104513221.png)
